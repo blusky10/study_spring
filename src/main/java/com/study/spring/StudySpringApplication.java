@@ -1,4 +1,4 @@
-package com.study.srping;
+package com.study.spring;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

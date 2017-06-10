@@ -1,4 +1,4 @@
-package com.study.srping;
+package com.study.spring;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
