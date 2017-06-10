@@ -1,9 +1,6 @@
 package com.study.spring.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,18 +12,24 @@ public class Story {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long storyId;
 
     private String title;
 
-    private List<User> users = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "bookId", insertable = false, updatable = false)
+    private Book book;
 
-    public Long getId() {
-        return id;
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "storyId")
+    private List<Character> characters = new ArrayList<>();
+
+    public Long getStoryId() {
+        return storyId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setStoryId(Long storyId) {
+        this.storyId = storyId;
     }
 
     public String getTitle() {
@@ -37,11 +40,19 @@ public class Story {
         this.title = title;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public Book getBook() {
+        return book;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public List<Character> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(List<Character> characters) {
+        this.characters = characters;
     }
 }

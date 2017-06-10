@@ -1,9 +1,6 @@
 package com.study.spring.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by SDS on 2017-06-10.
@@ -12,18 +9,22 @@ import javax.persistence.Id;
 public class Character {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long characterId;
 
     private String name;
 
     private String description;
 
-    public Long getId() {
-        return id;
+    @ManyToOne
+    @JoinColumn(name = "storyId", insertable = false, updatable = false)
+    private Story story;
+
+    public Long getCharacterId() {
+        return characterId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCharacterId(Long characterId) {
+        this.characterId = characterId;
     }
 
     public String getName() {
@@ -40,5 +41,13 @@ public class Character {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Story getStory() {
+        return story;
+    }
+
+    public void setStory(Story story) {
+        this.story = story;
     }
 }

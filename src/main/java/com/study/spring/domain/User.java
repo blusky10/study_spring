@@ -10,16 +10,16 @@ import javax.persistence.Id;
 public class User {
 
     @Id
-    private String id;
+    private String loginId;
     private String name;
     private String email;
 
-    public String getId() {
-        return id;
+    public String getLoginId() {
+        return loginId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
     }
 
     public String getName() {
