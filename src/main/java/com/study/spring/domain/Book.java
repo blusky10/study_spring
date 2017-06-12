@@ -20,6 +20,13 @@ public class Book {
     @JoinColumn(name = "bookId")
     private List<Story> stories = new ArrayList<>();
 
+    public Book() {
+    }
+
+    public Book(String title) {
+        this.title = title;
+    }
+
     public Long getBookId() {
         return bookId;
     }
