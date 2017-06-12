@@ -2,9 +2,6 @@ package com.study.spring.domain;
 
 import javax.persistence.*;
 
-/**
- * Created by SDS on 2017-06-10.
- */
 @Entity
 public class Character {
     @Id

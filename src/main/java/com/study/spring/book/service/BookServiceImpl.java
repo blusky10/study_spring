@@ -7,9 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by SDS on 2017-06-12.
- */
 @Service
 public class BookServiceImpl implements BookService {
 

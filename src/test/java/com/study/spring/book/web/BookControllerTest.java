@@ -23,15 +23,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-/**
- * Created by SDS on 2017-06-12.
- */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BookControllerTest {
 
 
     private HttpMessageConverter messageConverter;
+
     private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
                                         MediaType.APPLICATION_JSON.getSubtype(),
                                         Charset.forName("utf8"));

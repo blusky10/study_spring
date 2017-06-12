@@ -4,9 +4,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by SDS on 2017-06-09.
- */
 @Entity
 public class Story {
 

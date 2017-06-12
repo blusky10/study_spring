@@ -3,9 +3,6 @@ package com.study.spring.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-/**
- * Created by SDS on 2017-06-09.
- */
 @Entity
 public class User {
 
