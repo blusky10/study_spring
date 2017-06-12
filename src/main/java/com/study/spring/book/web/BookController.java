@@ -16,7 +16,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @RequestMapping(value = "/book/{bookId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/book/{bookId}", method = RequestMethod.GET, produces = "application/json")
     public Book getBook(@PathVariable Long bookId){
         return bookService.getBook(bookId);
     }
