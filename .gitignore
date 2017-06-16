@@ -3,7 +3,7 @@
 #!gradle/wrapper/gradle-wrapper.jar
 
 ### IntelliJ IDEA ###
-#.idea
+.idea
 #*.iws
 #*.iml
 #*.ipr
@@ -73,6 +73,7 @@ modules.xml
 ### Java ###
 # Compiled class file
 *.class
+classes/
 
 # Log file
 *.log
@@ -97,6 +98,7 @@ hs_err_pid*
 ### Gradle ###
 .gradle
 /build/
+gradle/
 
 # Ignore Gradle GUI config
 gradle-app.setting
