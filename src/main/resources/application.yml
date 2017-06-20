@@ -3,16 +3,23 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:test
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/holmes
+    username: root
+    validation-query: select 1
+    test-while-idle: true
+    time-between-eviction-runs-millis: 300000
+    test-on-borrow: false
   jpa:
+    database: mysql
+    show-sql: true
     hibernate:
       ddl-auto: create
-  h2:
-    console:
-      enabled: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+        default_schema: holmes
 
 
 

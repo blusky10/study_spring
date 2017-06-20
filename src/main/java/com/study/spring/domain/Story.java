@@ -17,10 +17,6 @@ public class Story {
     @JoinColumn(name = "bookId", insertable = false, updatable = false)
     private Book book;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "storyId")
-    private List<Character> characters = new ArrayList<>();
-
     public Long getStoryId() {
         return storyId;
     }
@@ -43,13 +39,5 @@ public class Story {
 
     public void setBook(Book book) {
         this.book = book;
-    }
-
-    public List<Character> getCharacters() {
-        return characters;
-    }
-
-    public void setCharacters(List<Character> characters) {
-        this.characters = characters;
     }
 }
