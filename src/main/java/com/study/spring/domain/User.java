@@ -7,9 +7,6 @@
 //import javax.persistence.Id;
 //import java.util.Collection;
 //
-///**
-// * Created by SDS on 2017-06-22.
-// */
 //@Entity
 //public class User implements UserDetails {
 //

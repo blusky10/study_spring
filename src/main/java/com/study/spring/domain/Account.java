@@ -3,9 +3,6 @@ package com.study.spring.domain;
 import javax.persistence.*;
 import java.util.List;
 
-/**
- * Created by SDS on 2017-06-21.
- */
 @Entity
 public class Account {
     @Id
@@ -18,8 +15,6 @@ public class Account {
     private String email;
 
     private boolean enabled;
-
-    private List<Role> roles;
 
     public String getLoingId() {
         return loingId;
@@ -61,11 +56,4 @@ public class Account {
         this.enabled = enabled;
     }
 
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
 }

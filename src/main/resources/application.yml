@@ -4,12 +4,14 @@ server:
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/holmes
+    url: jdbc:mariadb://172.30.1.29:3306/holmes
     username: root
+    password: root!23$
     validation-query: select 1
     test-while-idle: true
     time-between-eviction-runs-millis: 300000
     test-on-borrow: false
+
   jpa:
     database: mysql
     show-sql: true
@@ -20,6 +22,3 @@ spring:
         format_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
         default_schema: holmes
-
-
-
