@@ -1,7 +1,7 @@
 package com.study.spring.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by SDS on 2017-06-21.
@@ -18,6 +18,8 @@ public class Account {
     private String email;
 
     private boolean enabled;
+
+    private List<Role> roles;
 
     public String getLoingId() {
         return loingId;
@@ -57,5 +59,13 @@ public class Account {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
