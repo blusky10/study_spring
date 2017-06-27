@@ -15,11 +15,11 @@ public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter 
     @Autowired
     private CustomUserDetailService customUserDetailService;
 
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/").permitAll();
-    }
+//    @Override
+//    public void configure(HttpSecurity http) throws Exception {
+//        http.authorizeRequests()
+//                .antMatchers("/").permitAll();
+//    }
 
     public void init(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(this.customUserDetailService);

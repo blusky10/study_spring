@@ -4,10 +4,7 @@
 //import javax.persistence.Id;
 //import javax.persistence.ManyToMany;
 //import java.util.List;
-//
-///**
-// * Created by SDS on 2017-06-22.
-// */
+
 //@Entity
 //public class Role {
 //
