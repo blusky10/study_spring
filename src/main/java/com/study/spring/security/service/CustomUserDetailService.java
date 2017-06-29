@@ -4,6 +4,7 @@ import com.study.spring.account.service.AccountService;
 import com.study.spring.domain.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,12 +25,16 @@ public class CustomUserDetailService implements UserDetailsService{
 
         Account account = accountService.get(loginId);
 
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+//        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 //        for (Role role : account.getRoles()){
 //            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
 //        }
 
-        User user = new User(account.getLoingId(), account.getPassword(), grantedAuthorities);
+
+
+        User user = new User(account.getLoingId(),
+                account.getPassword(),
+                AuthorityUtils.createAuthorityList("ROLE_ADMIN"));
 
         return user;
     }

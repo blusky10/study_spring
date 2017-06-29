@@ -1,43 +1,43 @@
-package com.study.spring.domain;
-
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
-@Entity
-public class Story {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long storyId;
-
-    private String title;
-
-    @ManyToOne
-    @JoinColumn(name = "bookId", insertable = false, updatable = false)
-    private Book book;
-
-    public Long getStoryId() {
-        return storyId;
-    }
-
-    public void setStoryId(Long storyId) {
-        this.storyId = storyId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
-}
+//package com.study.spring.domain;
+//
+//import javax.persistence.*;
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//@Entity
+//public class Story {
+//
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    private Long storyId;
+//
+//    private String title;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "bookId", insertable = false, updatable = false)
+//    private Book book;
+//
+//    public Long getStoryId() {
+//        return storyId;
+//    }
+//
+//    public void setStoryId(Long storyId) {
+//        this.storyId = storyId;
+//    }
+//
+//    public String getTitle() {
+//        return title;
+//    }
+//
+//    public void setTitle(String title) {
+//        this.title = title;
+//    }
+//
+//    public Book getBook() {
+//        return book;
+//    }
+//
+//    public void setBook(Book book) {
+//        this.book = book;
+//    }
+//}

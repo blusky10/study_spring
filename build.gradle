@@ -26,10 +26,13 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.security.oauth:spring-security-oauth2')
 
-	runtime('group:com.h2database:h2');
+//	runtime('com.h2database:h2');
 
-	testCompile('group:com.jayway.jsonpath:json-path')
+	compile('org.mariadb.jdbc:mariadb-java-client:2.0.2')
 
+	testCompile('com.jayway.jsonpath:json-path')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
