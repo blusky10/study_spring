@@ -1,7 +1,5 @@
 package com.study.spring.authserver.config;
 
-import com.study.spring.security.service.CustomUserDetailService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -26,7 +24,6 @@ public class AuthServiceConfiguration extends AuthorizationServerConfigurerAdapt
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         // 인증서버 보안 설정하는 부분
-
     }
 
     @Override
