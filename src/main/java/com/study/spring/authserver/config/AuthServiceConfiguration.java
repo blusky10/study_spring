@@ -1,5 +1,6 @@
 package com.study.spring.authserver.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -8,12 +9,17 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 
+import javax.sql.DataSource;
+
 /**
  * Created by blusky10 on 2017. 6. 29..
  */
 @Configuration
 @EnableAuthorizationServer
 public class AuthServiceConfiguration extends AuthorizationServerConfigurerAdapter {
+
+    @Autowired
+    private DataSource datasource;
 
     private final AuthenticationManager authenticationManager;
 
@@ -29,12 +35,13 @@ public class AuthServiceConfiguration extends AuthorizationServerConfigurerAdapt
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         // client 정보 설정
-        clients
-                .inMemory()
-                .withClient("holmes")
-                .secret("password")
-                .authorizedGrantTypes("password")
-                .scopes("openid");
+        clients.jdbc(datasource);
+//        clients
+//                .inMemory()
+//                .withClient("holmes")
+//                .secret("password")
+//                .authorizedGrantTypes("password")
+//                .scopes("openid");
     }
 
     @Override
