@@ -2,6 +2,8 @@ package com.study.spring.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class RolePermission implements Serializable{
@@ -12,11 +14,11 @@ public class RolePermission implements Serializable{
 
     @ManyToMany
     @JoinColumn(name = "role_id")
-    private Role role;
+    private List<Role> roles = new ArrayList<>();
 
     @ManyToMany
     @JoinColumn(name = "permission_id")
-    private Permission permission;
+    private List<Permission> permissions = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -26,19 +28,27 @@ public class RolePermission implements Serializable{
         this.id = id;
     }
 
-    public Role getRole() {
-        return role;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void addRole(Role role) {
+        this.roles.add(role);
     }
 
-    public Permission getPermission() {
-        return permission;
+    public void removeRole(Role role) {
+        this.roles.remove(role);
     }
 
-    public void setPermission(Permission permission) {
-        this.permission = permission;
+    public List<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void addPermission(Permission permission) {
+        this.permissions.add(permission);
+    }
+
+    public void removePermission(Permission permission) {
+        this.permissions.remove(permission);
     }
 }
