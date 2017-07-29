@@ -14,6 +14,9 @@ public class Role {
 
     private String description;
 
+    @Column(nullable = false)
+    private boolean enable;
+
     public Long getId() {
         return id;
     }
@@ -36,5 +39,13 @@ public class Role {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Boolean getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
     }
 }

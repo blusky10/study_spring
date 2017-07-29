@@ -20,7 +20,7 @@ public class Account {
     private String email;
 
     @Column(nullable = false)
-    private boolean enabled;
+    private boolean enable;
 
     public String getLoingId() {
         return loingId;
@@ -54,12 +54,11 @@ public class Account {
         this.email = email;
     }
 
-    public boolean isEnabled() {
-        return enabled;
+    public boolean isEnable() {
+        return enable;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
-
 }

@@ -15,7 +15,7 @@ public class View {
     private String viewDesc;
 
     @Column(nullable = false)
-    private boolean isEnable;
+    private boolean enable;
 
     public Long getId() {
         return id;
@@ -42,10 +42,10 @@ public class View {
     }
 
     public boolean isEnable() {
-        return isEnable;
+        return enable;
     }
 
     public void setEnable(boolean enable) {
-        isEnable = enable;
+        this.enable = enable;
     }
 }

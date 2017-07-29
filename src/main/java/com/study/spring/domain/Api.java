@@ -17,6 +17,9 @@ public class Api {
 
     private String description;
 
+    @Column(nullable = false)
+    private boolean enable;
+
     public Long getId() {
         return id;
     }

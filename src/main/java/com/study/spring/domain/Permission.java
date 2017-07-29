@@ -30,6 +30,9 @@ public class Permission implements Serializable{
     @JoinColumn(name = "api_id")
     private Api api;
 
+    @Column(nullable = false)
+    private boolean enable;
+
     public Long getId() {
         return id;
     }

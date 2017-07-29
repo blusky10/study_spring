@@ -17,6 +17,9 @@ public class Component {
 
     private String bindingId;
 
+    @Column(nullable = false)
+    private boolean enable;
+
     public Long getId() {
         return id;
     }

@@ -22,7 +22,7 @@ public class Menu {
 	private int praceOrder;
 
 	@Column(nullable = false)
-	private boolean isEnable;
+	private boolean enable;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "parent_menu_uid")
@@ -80,11 +80,11 @@ public class Menu {
 	}
 
 	public boolean isEnable() {
-		return isEnable;
+		return enable;
 	}
 
 	public void setEnable(boolean enable) {
-		isEnable = enable;
+		this.enable = enable;
 	}
 
 	public Menu getMenu() {

@@ -2,8 +2,6 @@ package com.study.spring.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class AccountRole implements Serializable{
@@ -12,13 +10,13 @@ public class AccountRole implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "account_id")
-    private List<Account> accounts = new ArrayList<>();
+    private Account account;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "role_id")
-    private List<Role> roles = new ArrayList<>();
+    private Role role;
 
     public Long getId() {
         return id;
@@ -28,27 +26,19 @@ public class AccountRole implements Serializable{
         this.id = id;
     }
 
-    public List<Account> getAccounts() {
-        return accounts;
+    public Account getAccount() {
+        return account;
     }
 
-    public void addAccount(Account account) {
-        this.accounts.add(account);
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
-    public void removeAccount(Account account) {
-        this.accounts.remove(account);
+    public Role getRole() {
+        return role;
     }
 
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void addRole(Role role) {
-        this.roles.add(role);
-    }
-
-    public void removeRole(Role role) {
-        this.roles.remove(role);
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
