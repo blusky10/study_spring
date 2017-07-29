@@ -1,19 +1,25 @@
 package com.study.spring.domain;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Account {
+
     @Id
     private String loingId;
 
+    @Column(nullable = false)
     private String username;
 
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private boolean enabled;
 
     public String getLoingId() {

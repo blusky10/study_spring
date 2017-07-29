@@ -3,16 +3,19 @@ package com.study.spring.domain;
 import javax.persistence.*;
 
 @Entity
-public class Role {
+public class Component {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
+    private String type;
+
+    @Column(nullable = false)
     private String name;
 
-    private String description;
+    private String bindingId;
 
     public Long getId() {
         return id;
@@ -20,6 +23,14 @@ public class Role {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getName() {
@@ -30,11 +41,12 @@ public class Role {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getBindingId() {
+        return bindingId;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setBindingId(String bindingId) {
+        this.bindingId = bindingId;
     }
 }
+
