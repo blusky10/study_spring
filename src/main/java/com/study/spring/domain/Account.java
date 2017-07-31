@@ -1,8 +1,8 @@
 package com.study.spring.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Account {
@@ -21,6 +21,9 @@ public class Account {
 
     @Column(nullable = false)
     private boolean enable;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AccountRole> accountRoles = new ArrayList<>();
 
     public String getLoingId() {
         return loingId;
@@ -60,5 +63,13 @@ public class Account {
 
     public void setEnable(boolean enable) {
         this.enable = enable;
+    }
+
+    public List<AccountRole> getAccountRoles() {
+        return accountRoles;
+    }
+
+    public void setAccountRoles(List<AccountRole> accountRoles) {
+        this.accountRoles = accountRoles;
     }
 }
