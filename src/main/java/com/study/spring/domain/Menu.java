@@ -19,7 +19,7 @@ public class Menu {
 
 	private String description;
 
-	private int praceOrder;
+	private int placeOrder;
 
 	@Column(nullable = false)
 	private boolean enable;
@@ -71,12 +71,12 @@ public class Menu {
 		this.description = description;
 	}
 
-	public int getPraceOrder() {
-		return praceOrder;
+	public int getPlaceOrder() {
+		return placeOrder;
 	}
 
-	public void setPraceOrder(int praceOrder) {
-		this.praceOrder = praceOrder;
+	public void setPlaceOrder(int placeOrder) {
+		this.placeOrder = placeOrder;
 	}
 
 	public boolean isEnable() {
