@@ -3,6 +3,8 @@ package com.study.spring.account.service;
 import com.study.spring.StudySpringApplication;
 import com.study.spring.domain.Account;
 import com.study.spring.domain.AccountRole;
+import com.study.spring.domain.Role;
+import com.study.spring.role.service.RoleService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class AccountServiceTest {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private RoleService roleService;
 
     @Test
     @Transactional
@@ -42,9 +47,12 @@ public class AccountServiceTest {
 
         account.setLoingId("admin1");
         account.setUsername("admin1");
-        account.setPassword("create!");
+        account.setPassword("admin1!");
         account.setEnable(true);
-        accountService.create(account);
+
+        Role role = roleService.get((long)1000);
+
+        accountService.create(account, role);
     }
 
     @Test

@@ -50,16 +50,18 @@ public class AccountServiceImpl implements AccountService {
         accountRoleRepository.save(accountRole);
     }
 
-    public void create(Account account){
-
-        Role newRole = roleService.get((long)10002);
-
-        AccountRole accountRole = new AccountRole();
-        accountRole.setAccount(account);
-        accountRole.setRole(newRole);
+    public void create(Account account, Role role){
 
         accountRepository.save(account);
-        accountRoleRepository.save(accountRole);
+
+        if (role != null){
+            AccountRole accountRole = new AccountRole();
+            accountRole.setAccount(account);
+            accountRole.setRole(role);
+
+            accountRoleRepository.save(accountRole);
+        }
+
     }
 
     @Override

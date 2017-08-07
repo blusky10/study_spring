@@ -46,4 +46,19 @@ public class RoleServiceImpl implements RoleService {
         roleRepository.save(role);
     }
 
+    @Override
+    public void create(Role role, Account account) {
+
+        roleRepository.save(role);
+
+        if (account != null){
+            AccountRole accountRole = new AccountRole();
+            accountRole.setAccount(account);
+            accountRole.setRole(role);
+
+            accountRoleRepository.save(accountRole);
+        }
+
+    }
+
 }

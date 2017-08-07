@@ -22,13 +22,22 @@ public class RoleServieTest {
     @Test
     @Transactional
     public void getRole(){
-        Role role = roleService.get((long) 10000);
+        Role role = roleService.get((long) 1000);
 
         List<AccountRole> accountRoles = role.getAccountRoles();
 
         accountRoles.stream().forEach(
                 accountRole -> System.out.println(accountRole.getAccount().getLoingId())
         );
+    }
+
+    @Test
+    public void create(){
+        Role role = new Role();
+        role.setEnable(true);
+        role.setName("Sales");
+
+        roleService.create(role, null);
     }
 
     @Test
