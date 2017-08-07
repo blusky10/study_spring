@@ -3,8 +3,6 @@ package com.study.spring.account.service;
 import com.study.spring.StudySpringApplication;
 import com.study.spring.domain.Account;
 import com.study.spring.domain.AccountRole;
-import com.study.spring.domain.Role;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = StudySpringApplication.class)
@@ -25,15 +24,31 @@ public class AccountServiceTest {
     public void getAccount(){
         Account admin = accountService.get("admin");
 
-        AccountRole accountRole = admin.getAccountRoles().get(0);
+        List<AccountRole> accountRoles = admin.getAccountRoles();
 
-        Assert.assertNotNull(accountRole);
+        accountRoles.stream().forEach(
+                accountRole -> System.out.println(accountRole.getRole().getName())
+        );
+    }
 
-        Role role = accountRole.getRole();
+    @Test
+    public void update(){
+        accountService.update("admin");
+    }
 
-        Assert.assertNotNull(role);
+    @Test
+    public void create(){
+        Account account = new Account();
 
-        Assert.assertEquals("Administrator", role.getName());
+        account.setLoingId("admin1");
+        account.setUsername("admin1");
+        account.setPassword("create!");
+        account.setEnable(true);
+        accountService.create(account);
+    }
 
+    @Test
+    public void delete(){
+        accountService.updateRole("admin1");
     }
 }
