@@ -37,8 +37,22 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void update(){
-        accountService.update("admin");
+    public void updateOnlyAccount(){
+        Account account = accountService.get("admin1");
+        account.setEmail("admin1@test.com");
+
+        accountService.update(account, null);
+    }
+
+    @Test
+    @Transactional
+    public void updateWithRole(){
+        Account account = accountService.get("admin1");
+        account.setEmail("admin2@test.com");
+
+        Role role = roleService.get((long)1001);
+
+        accountService.update(account, role);
     }
 
     @Test
@@ -55,8 +69,4 @@ public class AccountServiceTest {
         accountService.create(account, role);
     }
 
-    @Test
-    public void delete(){
-        accountService.updateRole("admin1");
-    }
 }

@@ -35,21 +35,33 @@ public class AccountServiceImpl implements AccountService {
         return  accountRepository.findAll();
     }
 
+
+    /**
+     * Account 정보를 Update 한다
+     * @param account
+     * @param role
+     */
     @Override
-    public void update(String loginId) {
-        Account account = this.get(loginId);
+    public void update(Account account, Role role) {
+        if (role != null){
+            AccountRole accountRole = new AccountRole();
+            accountRole.setAccount(account);
+            accountRole.setRole(role);
 
-        Role newRole = roleService.get((long)10002);
+            account.getAccountRoles().add(accountRole);
 
-        AccountRole accountRole = new AccountRole();
-        accountRole.setAccount(account);
-        accountRole.setRole(newRole);
+            accountRoleRepository.save(accountRole);
+        }else{
+            accountRepository.save(account);
+        }
 
-        account.setEmail("test@test.com");
-
-        accountRoleRepository.save(accountRole);
     }
 
+    /**
+     * Account 를 생성한다
+     * @param account
+     * @param role
+     */
     public void create(Account account, Role role){
 
         accountRepository.save(account);
@@ -61,24 +73,6 @@ public class AccountServiceImpl implements AccountService {
 
             accountRoleRepository.save(accountRole);
         }
-
-    }
-
-    @Override
-    public void updateRole(String loginId) {
-
-        Account account = this.get(loginId);
-
-        Role newRole = roleService.get((long)10001);
-
-        account.removeAccountRoles();
-
-        AccountRole accountRole = new AccountRole();
-        accountRole.setAccount(account);
-        accountRole.setRole(newRole);
-        account.getAccountRoles().add(accountRole);
-
-        accountRoleRepository.save(accountRole);
 
     }
 }
