@@ -14,4 +14,6 @@ public interface AccountService {
 
     void create(Account account, Role role);
 
+    void delete(String loginId);
+
 }

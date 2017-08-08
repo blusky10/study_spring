@@ -22,8 +22,7 @@ public class Account {
     @Column(nullable = false)
     private boolean enable;
 
-    //@OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OneToMany(mappedBy = "account")
+    @OneToMany(mappedBy = "account", orphanRemoval = true)
     private List<AccountRole> accountRoles = new ArrayList<>();
 
     public String getLoingId() {
@@ -74,7 +73,16 @@ public class Account {
         this.accountRoles = accountRoles;
     }
 
-    public void removeAccountRoles(){
-        this.accountRoles = new ArrayList<>();
+    public void addAccountRoles(AccountRole accountRoles) {
+        if (this.accountRoles == null){
+            this.accountRoles = new ArrayList<>();
+        }
+        this.accountRoles.add(accountRoles);
+        accountRoles.setAccount(this);
     }
+
+    public void removeAccountRoles(){
+        this.accountRoles = null;
+    }
+
 }

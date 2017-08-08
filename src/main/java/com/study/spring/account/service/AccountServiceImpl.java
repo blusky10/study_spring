@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -47,14 +48,15 @@ public class AccountServiceImpl implements AccountService {
             AccountRole accountRole = new AccountRole();
             accountRole.setAccount(account);
             accountRole.setRole(role);
-
+//
+//            account.getAccountRoles().remove(account.getAccountRoles());
+//            accountRepository.save(account);
             account.getAccountRoles().add(accountRole);
-
             accountRoleRepository.save(accountRole);
+
         }else{
             accountRepository.save(account);
         }
-
     }
 
     /**
@@ -74,5 +76,10 @@ public class AccountServiceImpl implements AccountService {
             accountRoleRepository.save(accountRole);
         }
 
+    }
+
+    @Override
+    public void delete(String loginId) {
+        accountRepository.delete(loginId);
     }
 }

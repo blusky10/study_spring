@@ -12,5 +12,7 @@ public interface AccountRoleRepository extends JpaRepository<AccountRole, Long> 
 
     List<AccountRole> findAccountRoleByAccount(Account account);
 
+    List<AccountRole> findAccountRoleByAccount_LoingId(String loginId);
+
     void removeAccountRoleByIdIn(List<Long> ids);
 }

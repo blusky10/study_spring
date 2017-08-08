@@ -5,6 +5,7 @@ import com.study.spring.domain.Account;
 import com.study.spring.domain.AccountRole;
 import com.study.spring.domain.Role;
 import com.study.spring.role.service.RoleService;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class AccountServiceTest {
         Account account = accountService.get("admin1");
         account.setEmail("admin2@test.com");
 
-        Role role = roleService.get((long)1001);
+        Role role = roleService.get((long)10002);
 
         accountService.update(account, role);
     }
@@ -64,9 +65,19 @@ public class AccountServiceTest {
         account.setPassword("admin1!");
         account.setEnable(true);
 
-        Role role = roleService.get((long)1000);
+        Role role = roleService.get((long)10000);
 
         accountService.create(account, role);
+
+        Account account1 = accountService.get("admin1");
+        Assert.assertEquals("admin1", account1.getLoingId());
+    }
+
+    @Test
+    public void delete(){
+        accountService.delete("admin1");
+
+        Assert.assertNull(accountService.get("admin1"));
     }
 
 }
