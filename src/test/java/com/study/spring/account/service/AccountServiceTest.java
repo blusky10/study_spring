@@ -78,7 +78,7 @@ public class AccountServiceTest {
         Account account = accountService.get("admin1");
         account.setEmail("admin2@test.com");
 
-        Role role = roleService.get((long)10002);
+        Role role = roleService.get((long)10000);
 
         accountService.update(account, role);
     }
