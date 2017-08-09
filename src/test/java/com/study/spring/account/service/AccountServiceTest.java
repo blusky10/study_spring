@@ -38,15 +38,42 @@ public class AccountServiceTest {
     }
 
     @Test
+    public void createAccount(){
+        Account account = new Account();
+        account.setLoingId("admin2");
+        account.setUsername("admin2");
+        account.setPassword("admin12");
+        account.setEnable(true);
+
+        accountService.create(account, null);
+
+        Account account1 = accountService.get("admin2");
+        Assert.assertEquals("admin2", account1.getLoingId());
+    }
+
+    @Test
+    public void createAccountWithRole(){
+        Account account = new Account();
+        account.setLoingId("admin4");
+        account.setUsername("admin4");
+        account.setPassword("admin13");
+        account.setEnable(true);
+
+        Role role = roleService.get((long)10001);
+        accountService.create(account, role);
+
+        Account account1 = accountService.get("admin4");
+        Assert.assertEquals("admin4", account1.getLoingId());
+    }
+
+    @Test
     public void updateOnlyAccount(){
         Account account = accountService.get("admin1");
         account.setEmail("admin1@test.com");
-
         accountService.update(account, null);
     }
 
     @Test
-    @Transactional
     public void updateWithRole(){
         Account account = accountService.get("admin1");
         account.setEmail("admin2@test.com");
@@ -57,26 +84,8 @@ public class AccountServiceTest {
     }
 
     @Test
-    public void create(){
-        Account account = new Account();
-
-        account.setLoingId("admin1");
-        account.setUsername("admin1");
-        account.setPassword("admin1!");
-        account.setEnable(true);
-
-        Role role = roleService.get((long)10000);
-
-        accountService.create(account, role);
-
-        Account account1 = accountService.get("admin1");
-        Assert.assertEquals("admin1", account1.getLoingId());
-    }
-
-    @Test
     public void delete(){
         accountService.delete("admin1");
-
         Assert.assertNull(accountService.get("admin1"));
     }
 

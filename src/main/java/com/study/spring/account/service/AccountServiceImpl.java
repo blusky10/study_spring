@@ -36,7 +36,21 @@ public class AccountServiceImpl implements AccountService {
         return  accountRepository.findAll();
     }
 
+    /**
+     * Account 를 생성한다
+     * @param account
+     * @param role
+     */
+    public void create(Account account, Role role){
+        if (role != null){
+            AccountRole accountRole = new AccountRole();
+            accountRole.setAccount(account);
+            accountRole.setRole(role);
+            account.getAccountRoles().add(accountRole);
+        }
 
+        accountRepository.save(account);
+    }
     /**
      * Account 정보를 Update 한다
      * @param account
@@ -48,35 +62,16 @@ public class AccountServiceImpl implements AccountService {
             AccountRole accountRole = new AccountRole();
             accountRole.setAccount(account);
             accountRole.setRole(role);
-//
-//            account.getAccountRoles().remove(account.getAccountRoles());
-//            accountRepository.save(account);
-            account.getAccountRoles().add(accountRole);
-            accountRoleRepository.save(accountRole);
 
-        }else{
-            accountRepository.save(account);
+            account.removeAccountRoles();
+            account.addAccountRoles(accountRole);
         }
-    }
-
-    /**
-     * Account 를 생성한다
-     * @param account
-     * @param role
-     */
-    public void create(Account account, Role role){
 
         accountRepository.save(account);
 
-        if (role != null){
-            AccountRole accountRole = new AccountRole();
-            accountRole.setAccount(account);
-            accountRole.setRole(role);
-
-            accountRoleRepository.save(accountRole);
-        }
-
     }
+
+
 
     @Override
     public void delete(String loginId) {

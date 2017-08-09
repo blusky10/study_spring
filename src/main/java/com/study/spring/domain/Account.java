@@ -22,7 +22,7 @@ public class Account {
     @Column(nullable = false)
     private boolean enable;
 
-    @OneToMany(mappedBy = "account", orphanRemoval = true)
+    @OneToMany(mappedBy = "account", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<AccountRole> accountRoles = new ArrayList<>();
 
     public String getLoingId() {
