@@ -11,7 +11,7 @@ public class AccountRole implements Serializable{
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "account_id")
+    @JoinColumn(name = "login_id")
     private Account account;
 
     @ManyToOne
