@@ -35,8 +35,8 @@ public class CustomUserDetailService implements UserDetailsService{
 
         logger.debug("username : " + account.getUsername() );
 
-        String roles = account.getAccountRoles().stream().map(
-                accountRole -> accountRole.getRole().getName()
+        String roles = account.getRoles().stream().map(
+                role -> role.getName()
         ).collect(Collectors.joining(","));
 
         logger.debug("Roles : " + roles );

@@ -10,10 +10,10 @@ public interface AccountService {
 
     List<Account> getAll();
 
-    void update(Account account, Role role);
-
-    void create(Account account, Role role);
-
-    void delete(String loginId);
+//    void update(Account account, Role role);
+//
+//    void create(Account account, Role role);
+//
+//    void delete(String loginId);
 
 }

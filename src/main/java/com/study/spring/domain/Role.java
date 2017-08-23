@@ -19,9 +19,6 @@ public class Role {
     @Column(nullable = false)
     private boolean enable;
 
-    @OneToMany(mappedBy = "role")
-    private List<AccountRole> accountRoles = new ArrayList<>();
-
     public Long getId() {
         return id;
     }
@@ -52,13 +49,5 @@ public class Role {
 
     public void setEnable(boolean enable) {
         this.enable = enable;
-    }
-
-    public List<AccountRole> getAccountRoles() {
-        return accountRoles;
-    }
-
-    public void setAccountRoles(List<AccountRole> accountRoles) {
-        this.accountRoles = accountRoles;
     }
 }
