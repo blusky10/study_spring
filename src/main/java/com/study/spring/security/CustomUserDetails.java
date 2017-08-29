@@ -10,9 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by SDS on 2017-08-29.
- */
+
 public class CustomUserDetails implements UserDetails {
 
     private String username;

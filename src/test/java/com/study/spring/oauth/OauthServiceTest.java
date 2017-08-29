@@ -14,9 +14,6 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.util.Map;
 
-/**
- * Created by SDS on 2017-08-29.
- */
 public class OauthServiceTest {
 
     private final RestTemplate restTemplate = new RestTemplate();
