@@ -1,3 +1,6 @@
+server:
+  port: 9000
+
 spring:
   application:
     name: polpid_spring_study
@@ -27,3 +30,4 @@ logging:
   level:
     ROOT: info
     org.springframework.security: debug
+
