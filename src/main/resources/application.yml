@@ -12,6 +12,7 @@ spring:
     test-while-idle: true
     time-between-eviction-runs-millis: 300000
     test-on-borrow: false
+    initialize: true
 
   jpa:
     database: mysql
@@ -22,4 +23,4 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
-        default_schema: holmes
+        default_schema: springstudy
