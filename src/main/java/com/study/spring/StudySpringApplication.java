@@ -51,14 +51,14 @@ public class StudySpringApplication {
     }
 
     // 이부분을 사용하려면 ResourceSecurityConfiguration 과 CustomUserDetailService 파일을 주석처리한다
-//    @Autowired
-//    public void authenticationManager(AuthenticationManagerBuilder builder, AccountService accountService) throws Exception{
-//
-//    	builder.userDetailsService(new UserDetailsService() {
-//			@Override
-//			public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//				return new CustomUserDetails(accountService.get(username));
-//			}
-//		});
-//	}
+    @Autowired
+    public void authenticationManager(AuthenticationManagerBuilder builder, AccountService accountService) throws Exception{
+
+    	builder.userDetailsService(new UserDetailsService() {
+			@Override
+			public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+				return new CustomUserDetails(accountService.get(username));
+			}
+		});
+	}
 }
