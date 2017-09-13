@@ -1,51 +1,112 @@
 package com.study.spring.oauth;
 
 import org.apache.commons.codec.binary.Base64;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpStatusCodeException;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.util.Map;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class OauthServiceTest {
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    @LocalServerPort
+    private int port;
 
-    private String getOAuth2Token(String username, String password){
-        String plainClientCredentials = "myclient:secret";
-        String base64ClientCredentials = new String(Base64.encodeBase64(plainClientCredentials.getBytes()));
+    @Autowired
+    private TestRestTemplate restTemplate;
+
+    private String accessToken;
+
+    @Before
+    public void setup(){
+        accessToken = getOAuth2Token("admin", "admin1!");
+    }
+
+    public String getOAuth2Token(String username, String password) {
+        final String CLIENT_ID = "myclient";
+        final String CLIENT_SECRET = "secret";
+        final String GRANT_TYPE = "password";
+        final String SERVER_URL = "http://localhost:" + port;
+        final String API_OAUTH_TOKEN = "/oauth/token";
+
+        String clientCredentials = CLIENT_ID + ":" + CLIENT_SECRET;
+        String base64ClientCredentials = new String(Base64.encodeBase64(clientCredentials.getBytes()));
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         headers.add("Authorization", "Basic " + base64ClientCredentials);
 
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-        parameters.add("grant_type", "password");
+        parameters.add("grant_type", GRANT_TYPE);
         parameters.add("username", username);
         parameters.add("password", password);
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(parameters, headers);
 
         @SuppressWarnings("rawtypes")
-        ResponseEntity<Map> response = null;
+        ResponseEntity<Map> response;
 
-        URI uri = URI.create("http://localhost:9000/oauth/token");
+        URI uri = URI.create(SERVER_URL + API_OAUTH_TOKEN);
+        response = restTemplate.postForEntity(uri, request, Map.class);
+        return  (String) response.getBody().get("access_token");
+    }
 
-        try {
-            response = restTemplate.postForEntity(uri, request, Map.class);
-        } catch (HttpStatusCodeException e) {
+    @Test
+    public void getOAuth2TokenTest(){
+        Assert.assertNotNull(accessToken);
+    }
 
-        } catch (RestClientException e) {
+    @Test
+    public void getTestWithAccessToken(){
+        final String SERVER_URL = "http://localhost:" + port;
+        final String API_URL = "/private?access_token={access_token}";
 
-        }
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity(
+                SERVER_URL + API_URL,
+                String.class,
+                accessToken);
 
-        return (String)response.getBody().get("access_token");
+        Assert.assertEquals("private", responseEntity.getBody());
+    }
+
+    public void postTestWithAccessToken(){
+//          ObjectMapper objectMapper = new ObjectMapper();
+//        Map<String, Object> paramMap = new HashMap<>();
+//
+//        String body = null;
+//
+//        try {
+//            body = objectMapper.writeValueAsString(paramMap);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+//
+//        HttpEntity entity = new HttpEntity(body, headers);
+//        TestRestTemplate restTemplate = new TestRestTemplate();
+//        ResponseEntity<Boolean> booleanResponseEntity = restTemplate.postForEntity(
+//                SERVER_URL + API_URL,
+//                entity,
+//                boolean.class,
+//                access_token);
+//
+//        Assert.assertTrue(booleanResponseEntity.getBody());
     }
 }
