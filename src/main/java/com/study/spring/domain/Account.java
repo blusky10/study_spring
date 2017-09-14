@@ -8,7 +8,7 @@ import java.util.List;
 public class Account {
 
     @Id
-    private String loingId;
+    private String loginId;
 
     @Column(nullable = false)
     private String username;
@@ -25,12 +25,12 @@ public class Account {
     @OneToMany
     private List<Role> roles;
 
-    public String getLoingId() {
-        return loingId;
+    public String getLoginId() {
+        return loginId;
     }
 
-    public void setLoingId(String loingId) {
-        this.loingId = loingId;
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
     }
 
     public String getUsername() {
