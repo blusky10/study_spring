@@ -1,6 +1,5 @@
 package com.study.spring;
 
-import com.study.spring.account.repository.AccountRepository;
 import com.study.spring.account.service.AccountService;
 import com.study.spring.security.CustomUserDetails;
 import org.slf4j.Logger;
