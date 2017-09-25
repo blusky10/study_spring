@@ -6,7 +6,7 @@ spring:
     name: polpid_spring_study
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://52.79.220.83:3306/spring
+    url: jdbc:mariadb://localhost:3306/spring
     username: spring
     password: spring1!
     validation-query: select 1
