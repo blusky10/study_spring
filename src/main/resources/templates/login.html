@@ -18,8 +18,8 @@
     <!-- Begin page content -->
     <div class="container">
         <div class="content">
-            <!--<p th:if="${param.logout}" class="alert">Logout.</p>
-            <p th:if="${param.error}" class="alert alert-error">Error.</p>-->
+            <p th:if="${param.logout}" class="alert">Logout.</p>
+            <p th:if="${param.error}" class="alert alert-error">Error.</p>
 
             <h2>Login</h2>
             <form name="form" th:action="@{/login}" action="/login" method="POST">

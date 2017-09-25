@@ -40,6 +40,9 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 
 	compile('org.springframework.security.oauth:spring-security-oauth2')
+	compile('org.springframework.security:spring-security-taglibs')
+
+	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4')
 
 	compile('org.mariadb.jdbc:mariadb-java-client:2.0.2')
 
