@@ -11,11 +11,11 @@
 <body>
     <div class="container">
         <h1>Welcome</h1>
-        <!--<p sec:authorize="isAuthenticated()">-->
-            <!--<form th:action="@{/logout}" method="post">-->
-                <!--<input type="submit" value="Logout" />-->
-            <!--</form>-->
-        <!--</p>-->
+        <sec:authorize access="isAuthenticated()">
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Logout" />
+            </form>
+        </sec:authorize>
 
         <ul class="timeline">
             <div th:each="entry, status : ${accounts}">
