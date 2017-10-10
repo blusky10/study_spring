@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class MainController {
 
     private static final String VIEW_LOGIN = "login";
@@ -21,7 +21,7 @@ public class MainController {
     private AccountRepository accoutRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView ingex(ModelAndView modelAndView){
+    public ModelAndView index(ModelAndView modelAndView){
         List<Account> accounts = accoutRepository.findAll();
         modelAndView.setViewName("index");
         modelAndView.addObject("accounts", accounts);
@@ -40,8 +40,8 @@ public class MainController {
 //        return "home";
 //    }
 
-    @RequestMapping(value = "/private")
-    public String privateApi(){
-        return "private";
-    }
+//    @RequestMapping(value = "/private")
+//    public String privateApi(){
+//        return "private";
+//    }
 }
