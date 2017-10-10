@@ -13,7 +13,7 @@ public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter 
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
+                .antMatchers("/", "/browser/**").permitAll()
                 .antMatchers("/private/**").authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
