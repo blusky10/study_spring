@@ -1,22 +1,21 @@
 package com.study.spring;
 
-import com.study.spring.rabbitmq.Producer;
+import com.study.spring.account.service.AccountService;
+import com.study.spring.security.CustomUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.core.Queue;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.Banner;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.io.PrintStream;
-import java.util.Date;
 
 @SpringBootApplication
 @EnableScheduling
@@ -41,39 +40,39 @@ public class StudySpringApplication {
 		app.run(args);
 	}
 
-	@Value("${myqueue}")
-	String queue;
+//	@Value("${myqueue}")
+//	String queue;
+//
+//	@Bean
+//	Queue queue(){
+//		return new Queue(queue, false);
+//	}
+//
+//	@Autowired
+//	Producer producer;
+//
+//    @Bean
+//	CommandLineRunner sender(Producer producer){
+//    	return args -> {
+//    		producer.sendTo(queue, "Hello !!!");
+//		};
+//	}
 
-	@Bean
-	Queue queue(){
-		return new Queue(queue, false);
-	}
-
-	@Autowired
-	Producer producer;
-
-    @Bean
-	CommandLineRunner sender(Producer producer){
-    	return args -> {
-    		producer.sendTo(queue, "Hello !!!");
-		};
-	}
-
-	@Scheduled(fixedDelay = 10000L)
-	public void sendScheduleMessage(){
-		producer.sendTo(queue, "Message Delevery : " + new Date());
-	}
+//	@Scheduled(fixedDelay = 10000L)
+//	public void sendScheduleMessage(){
+//		producer.sendTo(queue, "Message Delevery : " + new Date());
+//	}
 
     // 이부분을 사용하려면 ResourceSecurityConfiguration 과 CustomUserDetailService 파일을 주석처리한다
-//    @Autowired
-//    public void authenticationManager(AuthenticationManagerBuilder builder, AccountService accountService) throws Exception{
-//
-//    	builder.userDetailsService(new UserDetailsService() {
-//			@Override
-//			public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//				return new CustomUserDetails(accountService.get(username));
-//			}
-//		});
-//	}
+    @Autowired
+    public void authenticationManager(AuthenticationManagerBuilder builder, AccountService accountService) throws Exception{
+
+    	builder.userDetailsService(new UserDetailsService() {
+			@Override
+			public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+				return new CustomUserDetails(accountService.get(username));
+			}
+		});
+	}
 
 }
