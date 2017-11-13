@@ -1,4 +1,4 @@
-package com.study.spring.config.authserver;
+package com.study.spring.authserver.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
