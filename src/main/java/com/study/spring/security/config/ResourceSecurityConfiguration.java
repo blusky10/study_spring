@@ -1,6 +1,7 @@
 package com.study.spring.security.config;
 
 
+import com.study.spring.security.handler.LoginFailureHandler;
 import com.study.spring.security.handler.LoginSuccessHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,6 +21,7 @@ public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter 
                 .and()
                 .formLogin()
                 .successHandler(new LoginSuccessHandler())
+                .failureHandler(new LoginFailureHandler())
                 .and()
                 .logout().permitAll();
     }
