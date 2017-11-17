@@ -1,6 +1,7 @@
 package com.study.spring.security.config;
 
 
+import com.study.spring.security.handler.LoginSuccessHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -13,10 +14,12 @@ public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter 
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/browser/**").permitAll()
+                .antMatchers("/", "login","/browser/**").permitAll()
                 .antMatchers("/private/**").authenticated()
+                .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").permitAll()
+                .formLogin()
+                .successHandler(new LoginSuccessHandler())
                 .and()
                 .logout().permitAll();
     }

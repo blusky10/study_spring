@@ -1,17 +1,13 @@
 package com.study.spring;
 
 import com.study.spring.account.service.AccountService;
-import com.study.spring.redis.RedisProducer;
 import com.study.spring.security.CustomUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.Banner;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -67,15 +63,15 @@ public class StudySpringApplication {
 //		producer.sendTo(queue, "Message Delevery : " + new Date());
 //	}
 
-	@Value("${redisTopic}")
-	String redisTopic;
-
-	@Bean
-	CommandLineRunner sender(RedisProducer producer){
-    	return args -> {
-    		producer.sendTo(redisTopic, "Hello !!!");
-		};
-	}
+//	@Value("${redisTopic}")
+//	String redisTopic;
+//
+//	@Bean
+//	CommandLineRunner sender(RedisProducer producer){
+//    	return args -> {
+//    		producer.sendTo(redisTopic, "Hello !!!");
+//		};
+//	}
 
     // 이부분을 사용하려면 ResourceSecurityConfiguration 과 CustomUserDetailService 파일을 주석처리한다
     @Autowired
