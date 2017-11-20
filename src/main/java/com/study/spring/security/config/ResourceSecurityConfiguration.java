@@ -3,9 +3,14 @@ package com.study.spring.security.config;
 
 import com.study.spring.security.handler.LoginFailureHandler;
 import com.study.spring.security.handler.LoginSuccessHandler;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 @Configuration
 public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -15,7 +20,7 @@ public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter 
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "login","/browser/**").permitAll()
+                .antMatchers("/", "/login/**","/browser/**", "/error/**").permitAll()
                 .antMatchers("/private/**").authenticated()
                 .anyRequest().authenticated()
                 .and()
@@ -23,7 +28,11 @@ public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter 
                 .successHandler(new LoginSuccessHandler())
                 .failureHandler(new LoginFailureHandler())
                 .and()
-                .logout().permitAll();
+                .logout().permitAll()
+                .and()
+                .sessionManagement()
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(true);
     }
 
     //    @Autowired
