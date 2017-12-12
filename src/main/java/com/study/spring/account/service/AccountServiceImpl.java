@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -26,21 +28,17 @@ public class AccountServiceImpl implements AccountService {
         return  accountRepository.findAll();
     }
 
-//    /**
-//     * Account 를 생성한다
-//     * @param account
-//     * @param role
-//     */
-//    public void create(Account account, Role role){
-//        if (role != null){
-//            AccountRole accountRole = new AccountRole();
-//            accountRole.setAccount(account);
-//            accountRole.setRole(role);
-//            account.getAccountRoles().add(accountRole);
-//        }
-//
-//        accountRepository.save(account);
-//    }
+    /**
+     * Account 를 생성한다
+     * @param account
+     * @param role
+     */
+    public void create(Account account, Role role){
+        if (role != null){
+            account.setRoles(new ArrayList<Role>(Arrays.asList(role)));
+        }
+        accountRepository.save(account);
+    }
 //
 //    /**
 //     * Account 정보를 Update 한다

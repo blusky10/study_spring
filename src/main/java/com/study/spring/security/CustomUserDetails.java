@@ -21,7 +21,7 @@ public class CustomUserDetails implements UserDetails, Serializable{
     Collection<? extends GrantedAuthority> authorities;
 
     public CustomUserDetails(Account account) {
-        this.username = account.getLoginId();
+        this.username = account.getId();
         this.password = account.getPassword();
 
         List<GrantedAuthority> authorityList = new ArrayList<>();

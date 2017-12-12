@@ -12,7 +12,7 @@ public interface AccountService {
 
 //    void update(Account account, Role role);
 //
-//    void create(Account account, Role role);
+    void create(Account account, Role role);
 //
 //    void delete(String loginId);
 

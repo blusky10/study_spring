@@ -32,16 +32,17 @@ public class OauthServiceTest {
 
     private String accessToken;
 
-    @Before
-    public void setup(){
+    @Test
+    public void test(){
         accessToken = getOAuth2Token("admin", "admin1!");
+        System.out.println(accessToken);
     }
 
     public String getOAuth2Token(String username, String password) {
-        final String CLIENT_ID = "myclient";
-        final String CLIENT_SECRET = "secret";
+        final String CLIENT_ID = "saas_client";
+        final String CLIENT_SECRET = "saas_client_secret";
         final String GRANT_TYPE = "password";
-        final String SERVER_URL = "http://localhost:" + port;
+        final String SERVER_URL = "http://localhost:8080";
         final String API_OAUTH_TOKEN = "/oauth/token";
 
         String clientCredentials = CLIENT_ID + ":" + CLIENT_SECRET;
@@ -53,8 +54,8 @@ public class OauthServiceTest {
 
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
         parameters.add("grant_type", GRANT_TYPE);
-        parameters.add("username", username);
-        parameters.add("password", password);
+        parameters.add("username", "sanghyun");
+        parameters.add("password", "gsRU6e7krmTuzR5eqhrUng==");
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(parameters, headers);
 

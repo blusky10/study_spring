@@ -1,17 +1,21 @@
 package com.study.spring.domain;
 
+import com.study.spring.auditing.AuditableDomain;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
-import java.util.ArrayList;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Data
-public class Account {
-
-    @Id
-    private String loginId;
+@EqualsAndHashCode(callSuper=false)
+@AttributeOverride(name="id", column = @Column(name = "login_id"))
+public class Account extends AuditableDomain implements Serializable {
 
     @Column(nullable = false)
     private String username;
