@@ -20,7 +20,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account get(String loginId) {
-        return accountRepository.findOne(loginId);
+        return accountRepository.findAccountByLoginId(loginId);
     }
 
     @Override

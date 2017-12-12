@@ -9,7 +9,7 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 @EntityListeners(value = {AuditingEntityListener.class})
-public class AuditableDomain extends AbstractAuditable<Account, String> {
+public class AuditableDomain extends AbstractAuditable<Account, Long> {
     private static final long serialVersionUID = 359326673134570560L;
 }
 

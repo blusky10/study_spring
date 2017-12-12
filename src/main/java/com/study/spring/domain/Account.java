@@ -14,8 +14,10 @@ import java.util.List;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper=false)
-@AttributeOverride(name="id", column = @Column(name = "login_id"))
 public class Account extends AuditableDomain implements Serializable {
+
+    @Column(nullable = false)
+    private String loginId;
 
     @Column(nullable = false)
     private String username;

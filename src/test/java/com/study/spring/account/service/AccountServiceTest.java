@@ -4,8 +4,11 @@ import com.study.spring.StudySpringApplication;
 import com.study.spring.domain.Account;
 import com.study.spring.domain.Role;
 import com.study.spring.role.service.RoleService;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -16,6 +19,8 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = StudySpringApplication.class)
 public class AccountServiceTest {
+
+    private static Logger logger = LoggerFactory.getLogger(AccountServiceTest.class);
 
     @Autowired
     private AccountService accountService;
@@ -28,26 +33,32 @@ public class AccountServiceTest {
     public void getAccount(){
         Account admin = accountService.get("admin");
 
+        Assert.assertNotNull(admin);
+        logger.debug(admin.toString());
+
         List<Role> roles = admin.getRoles();
 
+        Assert.assertNotNull(roles);
+
         roles.stream().forEach(
-                role -> System.out.println(role.getName())
+                role -> System.out.println(role.toString())
         );
     }
-//
-//    @Test
-//    public void createAccount(){
-//        Account account = new Account();
-//        account.setLoingId("admin2");
-//        account.setUsername("admin2");
-//        account.setPassword("admin12");
-//        account.setEnable(true);
-//
-//        accountService.create(account, null);
-//
-//        Account account1 = accountService.get("admin2");
-//        Assert.assertEquals("admin2", account1.getLoingId());
-//    }
+
+    @Test
+    public void createAccount(){
+        Account newAccount = new Account();
+        newAccount.setLoginId("admin");
+        newAccount.setUsername("admin user");
+        newAccount.setPassword("admin1!");
+        newAccount.setEmail("admin@spring.com");
+        newAccount.setEnable(true);
+
+        accountService.create(newAccount, null);
+
+        Account account = accountService.get("admin");
+        Assert.assertEquals("admin", account.getLoginId());
+    }
 //
 //    @Test
 //    public void createAccountWithRole(){
