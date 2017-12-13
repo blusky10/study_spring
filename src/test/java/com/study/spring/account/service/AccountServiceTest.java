@@ -1,16 +1,20 @@
 package com.study.spring.account.service;
 
 import com.study.spring.StudySpringApplication;
+import com.study.spring.auditing.CustomAuditorAware;
 import com.study.spring.domain.Account;
 import com.study.spring.domain.Role;
 import com.study.spring.role.service.RoleService;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
@@ -22,11 +26,21 @@ public class AccountServiceTest {
 
     private static Logger logger = LoggerFactory.getLogger(AccountServiceTest.class);
 
+
+    @MockBean
+    private CustomAuditorAware customAuditorAware;
+
     @Autowired
     private AccountService accountService;
 
     @Autowired
     private RoleService roleService;
+
+    @Before
+    public void setup(){
+        Account sessionAccount = accountService.get("admin");
+        Mockito.when(customAuditorAware.getCurrentAuditor()).thenReturn(sessionAccount);
+    }
 
     @Test
     @Transactional
@@ -48,7 +62,7 @@ public class AccountServiceTest {
     @Test
     public void createAccount(){
         Account newAccount = new Account();
-        newAccount.setLoginId("admin");
+        newAccount.setLoginId("admin1");
         newAccount.setUsername("admin user");
         newAccount.setPassword("admin1!");
         newAccount.setEmail("admin@spring.com");
@@ -56,8 +70,8 @@ public class AccountServiceTest {
 
         accountService.create(newAccount, null);
 
-        Account account = accountService.get("admin");
-        Assert.assertEquals("admin", account.getLoginId());
+        Account account = accountService.get("admin1");
+        Assert.assertEquals("admin1", account.getLoginId());
     }
 //
 //    @Test
