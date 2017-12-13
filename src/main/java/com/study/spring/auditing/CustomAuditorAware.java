@@ -6,7 +6,7 @@ import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-public class SpringSecurityAuditorAware implements AuditorAware<Account>{
+public class CustomAuditorAware implements AuditorAware<Account>{
 
     @Override
     public Account getCurrentAuditor() {

@@ -1,7 +1,5 @@
 package com.study.spring.role.service;
 
-import com.study.spring.account.repository.AccountRepository;
-import com.study.spring.account.service.AccountService;
 import com.study.spring.domain.Role;
 import com.study.spring.role.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +11,6 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleRepository roleRepository;
-
-    @Autowired
-    private AccountService accountService;
-
-    @Autowired
-    private AccountRepository accountRepository;
 
     @Override
     public Role get(Long id) {
@@ -40,19 +32,9 @@ public class RoleServiceImpl implements RoleService {
 //        roleRepository.save(role);
 //    }
 //
-//    @Override
-//    public void create(Role role, Account account) {
-//
-//        roleRepository.save(role);
-//
-//        if (account != null){
-//            AccountRole accountRole = new AccountRole();
-//            accountRole.setAccount(account);
-//            accountRole.setRole(role);
-//
-//            accountRoleRepository.save(accountRole);
-//        }
-//
-//    }
+    @Override
+    public void create(Role role) {
+        roleRepository.save(role);
+    }
 
 }

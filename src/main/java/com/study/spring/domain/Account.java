@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class Account extends AuditableDomain implements Serializable {
+public class Account extends AuditableDomain {
 
     @Column(nullable = false)
     private String loginId;
