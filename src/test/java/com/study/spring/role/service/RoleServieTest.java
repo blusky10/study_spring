@@ -5,10 +5,10 @@ import com.study.spring.account.service.AccountService;
 import com.study.spring.auditing.CustomAuditorAware;
 import com.study.spring.domain.Account;
 import com.study.spring.domain.Role;
+import com.study.spring.enums.EnableStatus;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,7 +36,7 @@ public class RoleServieTest {
 
     @Test
     public void createRole(){
-        Role role = new Role("GUEST", true);
+        Role role = new Role("GUEST", EnableStatus.TRUE);
         roleService.create(role);
     }
 }

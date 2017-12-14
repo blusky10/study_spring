@@ -1,13 +1,11 @@
 package com.study.spring.domain;
 
 import com.study.spring.auditing.AuditableDomain;
+import com.study.spring.enums.EnableStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -29,8 +27,11 @@ public class Account extends AuditableDomain {
     private String email;
 
     @Column(nullable = false)
-    private boolean enable;
+    @Enumerated(EnumType.ORDINAL)
+    private EnableStatus enable;
 
     @OneToMany
     private List<Role> roles;
+
+
 }

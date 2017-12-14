@@ -4,6 +4,7 @@ import com.study.spring.StudySpringApplication;
 import com.study.spring.auditing.CustomAuditorAware;
 import com.study.spring.domain.Account;
 import com.study.spring.domain.Role;
+import com.study.spring.enums.EnableStatus;
 import com.study.spring.role.service.RoleService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -57,6 +58,9 @@ public class AccountServiceTest {
         roles.stream().forEach(
                 role -> System.out.println(role.toString())
         );
+
+        System.out.println(admin.getEnable().getIntValue());
+        Assert.assertEquals(EnableStatus.TRUE, admin.getEnable());
     }
 
     @Test
@@ -66,12 +70,14 @@ public class AccountServiceTest {
         newAccount.setUsername("admin user");
         newAccount.setPassword("admin1!");
         newAccount.setEmail("admin@spring.com");
-        newAccount.setEnable(true);
+        newAccount.setEnable(EnableStatus.TRUE);
 
         accountService.create(newAccount, null);
 
         Account account = accountService.get("admin1");
         Assert.assertEquals("admin1", account.getLoginId());
+        Assert.assertEquals(EnableStatus.TRUE, account.getEnable());
+        Assert.assertNotNull(account.getCreatedBy());
     }
 //
 //    @Test
