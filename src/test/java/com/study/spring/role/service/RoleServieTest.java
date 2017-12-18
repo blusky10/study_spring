@@ -36,7 +36,7 @@ public class RoleServieTest {
 
     @Test
     public void createRole(){
-        Role role = new Role("GUEST", EnableStatus.TRUE);
+        Role role = new Role("ADMIN", EnableStatus.TRUE);
         roleService.create(role);
     }
 }

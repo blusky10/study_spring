@@ -39,23 +39,19 @@ public class AccountServiceImpl implements AccountService {
         }
         accountRepository.save(account);
     }
-//
-//    /**
-//     * Account 정보를 Update 한다
-//     * @param account
-//     * @param role
-//     */
-//    @Override
-//    public void update(Account account, Role role) {
-//        if (role != null){
-//            AccountRole accountRole = new AccountRole();
-//            accountRole.setAccount(account);
-//            accountRole.setRole(role);
-//            account.removeAccountRoles();
-//            account.addAccountRoles(accountRole);
-//        }
-//        accountRepository.save(account);
-//    }
+
+    /**
+     * Account 정보를 Update 한다
+     * @param account
+     * @param role
+     */
+    @Override
+    public void update(Account account, Role role) {
+        if (role != null){
+            account.setRoles(new ArrayList<Role>(Arrays.asList(role)));
+        }
+        accountRepository.save(account);
+    }
 //
 //    @Override
 //    public void delete(String loginId) {

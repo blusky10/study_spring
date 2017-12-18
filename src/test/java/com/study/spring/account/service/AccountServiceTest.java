@@ -79,39 +79,51 @@ public class AccountServiceTest {
         Assert.assertEquals(EnableStatus.TRUE, account.getEnable());
         Assert.assertNotNull(account.getCreatedBy());
     }
-//
-//    @Test
-//    public void createAccountWithRole(){
-//        Account account = new Account();
-//        account.setLoingId("admin4");
-//        account.setUsername("admin4");
-//        account.setPassword("admin13");
-//        account.setEnable(true);
-//
-//        Role role = roleService.get((long)10001);
-//        accountService.create(account, role);
-//
-//        Account account1 = accountService.get("admin4");
-//        Assert.assertEquals("admin4", account1.getLoingId());
-//    }
-//
-//    @Test
-//    public void updateOnlyAccount(){
-//        Account account = accountService.get("admin1");
-//        account.setEmail("admin1@test.com");
-//        accountService.update(account, null);
-//    }
-//
-//    @Test
-//    public void updateWithRole(){
-//        Account account = accountService.get("admin1");
-//        account.setEmail("admin2@test.com");
-//
-//        Role role = roleService.get((long)10000);
-//
-//        accountService.update(account, role);
-//    }
-//
+
+    @Test
+    public void updateAccount(){
+        Account admin = accountService.get("admin");
+        admin.setEmail("admin@spring.com");
+        accountService.update(admin, null);
+
+        Account result = accountService.get("admin");
+        Assert.assertEquals("admin@spring.com", result.getEmail());
+    }
+
+    @Test
+    public void createAccountWithRole(){
+        Account account = new Account();
+        account.setLoginId("admin4");
+        account.setUsername("admin4 user");
+        account.setPassword("admin4!");
+        account.setEmail("admin4@spring.com");
+        account.setEnable(EnableStatus.TRUE);
+
+        Role role = roleService.get((long)3);
+        accountService.create(account, role);
+
+        Account createAccount = accountService.get("admin4");
+        Assert.assertNotNull(createAccount.getRoles());
+        Assert.assertTrue((createAccount.getRoles().size() > 0));
+
+        Assert.assertEquals("ADMIN",createAccount.getRoles().get(0).getName());
+    }
+
+    @Test
+    public void updateWithRole(){
+        Account account = accountService.get("admin4");
+        account.setRoles(null);
+
+        Role role = roleService.get((long)2);
+
+        accountService.update(account, role);
+        Account createAccount = accountService.get("admin4");
+        Assert.assertNotNull(createAccount.getRoles());
+        Assert.assertTrue((createAccount.getRoles().size() == 1));
+
+        Assert.assertEquals("GUEST",createAccount.getRoles().get(0).getName());
+    }
+
 //    @Test
 //    public void delete(){
 //        accountService.delete("admin1");
