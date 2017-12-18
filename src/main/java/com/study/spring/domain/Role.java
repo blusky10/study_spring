@@ -5,6 +5,10 @@ import com.study.spring.enums.EnableStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.AuditOverride;
+import org.hibernate.envers.AuditOverrides;
+import org.hibernate.envers.Audited;
+import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +19,8 @@ import javax.persistence.Enumerated;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper=false)
+@Audited
+@AuditOverride(forClass = AbstractAuditable.class)
 public class Role extends AuditableDomain {
 
     @Column(nullable = false)

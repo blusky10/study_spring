@@ -83,11 +83,11 @@ public class AccountServiceTest {
     @Test
     public void updateAccount(){
         Account admin = accountService.get("admin");
-        admin.setEmail("admin@spring.com");
+        admin.setEmail("adminchange@spring.com");
         accountService.update(admin, null);
 
         Account result = accountService.get("admin");
-        Assert.assertEquals("admin@spring.com", result.getEmail());
+        Assert.assertEquals("adminchange@spring.com", result.getEmail());
     }
 
     @Test

@@ -1,3 +1,8 @@
-INSERT INTO account (loing_id, email, enable, password, username) VALUES ('admin', 'admin@test.com', b'1', 'admin1!', 'admin');
-INSERT INTO role (id, description, enable, name) VALUES (1, NULL, b'1', 'CLIENT');
-INSERT INTO account_roles (account_loing_id, roles_id) VALUES ('admin', 1);
+INSERT INTO account (id, email, enable, login_id, password, username)
+VALUES  (1, 'admin@spring.com', 1, 'admin', 'admin1!', 'admin user');
+
+INSERT INTO role (id, description, enable, name)
+VALUES  (1, NULL, 1, 'ADMIN'),
+  (2, NULL, 1, 'GUEST');
+
+INSERT INTO account_roles (account_id, roles_id) VALUES (1, 1);
