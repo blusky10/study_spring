@@ -5,12 +5,10 @@ import com.study.spring.enums.EnableStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.envers.AuditOverride;
-import org.hibernate.envers.AuditOverrides;
 import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -36,7 +34,7 @@ public class Account extends AuditableDomain {
     @Enumerated(EnumType.ORDINAL)
     private EnableStatus enable;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
 
 
