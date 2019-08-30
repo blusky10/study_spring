@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = StudySpringApplication.class)
@@ -40,7 +41,7 @@ public class AccountServiceTest {
     @Before
     public void setup(){
         Account sessionAccount = accountService.get("admin");
-        Mockito.when(customAuditorAware.getCurrentAuditor()).thenReturn(sessionAccount);
+        Mockito.when(customAuditorAware.getCurrentAuditor()).thenReturn(Optional.of(sessionAccount));
     }
 
     @Test

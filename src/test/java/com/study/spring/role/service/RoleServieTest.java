@@ -15,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Optional;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = StudySpringApplication.class)
 public class RoleServieTest {
@@ -31,7 +33,7 @@ public class RoleServieTest {
     @Before
     public void setup(){
         Account sessionAccount = accountService.get("admin");
-        Mockito.when(customAuditorAware.getCurrentAuditor()).thenReturn(sessionAccount);
+        Mockito.when(customAuditorAware.getCurrentAuditor()).thenReturn(Optional.of(sessionAccount));
     }
 
     @Test
