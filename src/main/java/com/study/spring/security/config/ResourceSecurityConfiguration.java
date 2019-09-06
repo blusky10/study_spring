@@ -3,7 +3,9 @@ package com.study.spring.security.config;
 
 import com.study.spring.security.handler.LoginFailureHandler;
 import com.study.spring.security.handler.LoginSuccessHandler;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -17,7 +19,7 @@ public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter 
 
         http
             .authorizeRequests()
-            .antMatchers("/", "/login/**","/browser/**", "/error/**", "/oauth/**", "/token/**", "/googlemap/**", "/h2-console/**").permitAll()
+            .antMatchers("/", "/browser/**", "/error/**", "/oauth/**", "/token/**", "/googlemap/**", "/h2-console/**").permitAll()
             .antMatchers("/private/**").authenticated()
             .anyRequest().authenticated()
             .and()
@@ -31,6 +33,13 @@ public class ResourceSecurityConfiguration extends WebSecurityConfigurerAdapter 
             .maximumSessions(1)
             .maxSessionsPreventsLogin(false);
     }
+
+
+//    @Override
+//    @Bean
+//    public AuthenticationManager authenticationManagerBean() throws Exception {
+//        return super.authenticationManagerBean();
+//    }
 
     //    @Autowired
 //    private CustomUserDetailService customUserDetailService;
