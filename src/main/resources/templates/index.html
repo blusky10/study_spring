@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html"/>
@@ -11,11 +11,11 @@
 <body>
     <div class="container">
         <h1>Welcome</h1>
-        <sec:authorize access="isAuthenticated()">
+        <div sec:authorize ="isAuthenticated()">
             <form th:action="@{/logout}" method="post">
                 <input type="submit" value="Logout" />
             </form>
-        </sec:authorize>
+        </div>
 
         <ul class="timeline">
             <div th:each="entry, status : ${accounts}">
