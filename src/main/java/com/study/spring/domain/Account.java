@@ -2,7 +2,6 @@ package com.study.spring.domain;
 
 import com.study.spring.auditing.AuditableDomain;
 import com.study.spring.enums.EnableStatus;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.envers.AuditOverride;
 import org.hibernate.envers.Audited;
@@ -12,7 +11,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
 @EqualsAndHashCode(callSuper=false)
 @Audited
 @AuditOverride(forClass = AbstractAuditable.class)
