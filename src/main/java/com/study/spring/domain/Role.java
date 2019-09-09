@@ -27,8 +27,6 @@ public class Role extends AuditableDomain {
     @Enumerated(EnumType.ORDINAL)
     private EnableStatus enable;
 
-    private String description;
-
     public Role(String name, EnableStatus enable) {
         this.name = name;
         this.enable = enable;
