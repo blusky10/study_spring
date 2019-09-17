@@ -1,20 +1,26 @@
 package com.study.spring.domain;
 
-import com.study.spring.auditing.AuditableDomain;
 import com.study.spring.enums.EnableStatus;
 import lombok.EqualsAndHashCode;
-import org.hibernate.envers.AuditOverride;
-import org.hibernate.envers.Audited;
-import org.springframework.data.jpa.domain.AbstractAuditable;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @EqualsAndHashCode(callSuper=false)
-@Audited
-@AuditOverride(forClass = AbstractAuditable.class)
-public class Account extends AuditableDomain {
+//@Audited
+//@AuditOverride(forClass = AbstractAuditable.class)
+@NoArgsConstructor
+@Getter
+@Setter
+public class Account {
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
     @Column(nullable = false)
     private String loginId;
@@ -32,8 +38,8 @@ public class Account extends AuditableDomain {
     @Enumerated(EnumType.ORDINAL)
     private EnableStatus enable;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id")
     private List<Role> roles;
-
 
 }
