@@ -8,6 +8,8 @@ import java.util.List;
 public interface AccountService {
     Account get(String loginId);
 
+    Account findAccountById(Long id);
+
     List<Account> getAll();
 
     void update(Account account, Role role);
