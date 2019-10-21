@@ -1,10 +1,17 @@
 package com.study.spring.account.dto;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
+@Getter
+@NoArgsConstructor
 public class AccountReqDto {
 
     private String loginId;
 
+    @Builder
+    public AccountReqDto(String loginId) {
+        this.loginId = loginId;
+    }
 }

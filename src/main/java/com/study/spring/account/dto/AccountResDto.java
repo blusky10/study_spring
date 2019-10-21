@@ -1,7 +1,9 @@
 package com.study.spring.account.dto;
 
 import lombok.Builder;
+import lombok.Getter;
 
+@Getter
 public class AccountResDto {
 
     private String loginId;
@@ -9,7 +11,6 @@ public class AccountResDto {
     private String email;
 
     @Builder
-
     public AccountResDto(String loginId, String username, String email) {
         this.loginId = loginId;
         this.username = username;
