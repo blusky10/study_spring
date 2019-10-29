@@ -4,7 +4,6 @@ package com.study.spring.account.web;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.study.spring.account.dto.AccountReqDto;
 import com.study.spring.account.dto.AccountResDto;
-import com.study.spring.account.repository.AccountRepository;
 import com.study.spring.account.service.AccountService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -23,20 +23,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(AccountRestController.class)
+@WebMvcTest(value = AccountRestController.class)
 public class AccountRestControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private AccountRestController accountRestController;
-
     @MockBean
     private AccountService accountService;
-
-    @MockBean
-    private AccountRepository accountRepository;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -57,6 +51,7 @@ public class AccountRestControllerTest {
     }
 
     @Test
+    @WithUserDetails
     public void getResDtoTest() throws Exception {
         MvcResult mvcResult = this.mockMvc.perform(
                 post("/api/v1/accounts")
