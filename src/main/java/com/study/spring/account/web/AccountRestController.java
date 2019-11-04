@@ -4,8 +4,13 @@ import com.study.spring.account.dto.AccountReqDto;
 import com.study.spring.account.dto.AccountResDto;
 
 
+import com.study.spring.account.service.AccountService;
+import com.study.spring.domain.Account;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,13 +18,13 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class AccountRestController {
 
-//    @Autowired
-//    private AccountService accountService;
-//
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Account> get(@PathVariable Long id){
-//        return ResponseEntity.ok(accountService.findAccountById(id));
-//    }
+    @Autowired
+    private AccountService accountService;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Account> get(@PathVariable Long id){
+        return ResponseEntity.ok(accountService.findAccountById(id));
+    }
 
     @PostMapping
     public ResponseEntity<AccountResDto> getResDto(@RequestBody AccountReqDto dto){
@@ -30,5 +35,10 @@ public class AccountRestController {
                 .username("tester")
                 .build()
         );
+    }
+
+    @GetMapping
+    public Page<AccountResDto> getResDto(Pageable pageable){
+        return accountService.findAll(pageable);
     }
 }

@@ -1,9 +1,12 @@
 package com.study.spring.account.service;
 
+import com.study.spring.account.dto.AccountResDto;
 import com.study.spring.account.repository.AccountRepository;
 import com.study.spring.domain.Account;
 import com.study.spring.domain.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -43,6 +46,12 @@ public class AccountServiceImpl implements AccountService {
             account.setRoles(new ArrayList<Role>(Arrays.asList(role)));
         }
         accountRepository.save(account);
+    }
+
+    @Override
+    public Page<AccountResDto> findAll(Pageable pageable) {
+        Page<Account> accounts = accountRepository.findAll(pageable);
+        return accounts.map(AccountResDto::new);
     }
 
     /**
