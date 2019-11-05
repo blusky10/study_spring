@@ -1,5 +1,6 @@
 package com.study.spring.account.service;
 
+import com.study.spring.account.dto.AccountCreateDto;
 import com.study.spring.account.dto.AccountResDto;
 import com.study.spring.domain.Account;
 import com.study.spring.domain.Role;
@@ -17,7 +18,7 @@ public interface AccountService {
 
     void update(Account account, Role role);
 //
-    void create(Account account, Role role);
+    void create(AccountCreateDto accountCreateDto);
 //
 //    void delete(String loginId);
 

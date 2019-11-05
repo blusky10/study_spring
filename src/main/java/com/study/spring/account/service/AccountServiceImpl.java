@@ -1,5 +1,6 @@
 package com.study.spring.account.service;
 
+import com.study.spring.account.dto.AccountCreateDto;
 import com.study.spring.account.dto.AccountResDto;
 import com.study.spring.account.repository.AccountRepository;
 import com.study.spring.domain.Account;
@@ -38,14 +39,10 @@ public class AccountServiceImpl implements AccountService {
 
     /**
      * Account 를 생성한다
-     * @param account
-     * @param role
+     * @param accountCreateDto
      */
-    public void create(Account account, Role role){
-        if (role != null){
-            account.setRoles(new ArrayList<Role>(Arrays.asList(role)));
-        }
-        accountRepository.save(account);
+    public void create(AccountCreateDto accountCreateDto){
+        accountRepository.save(accountCreateDto.convertToAccount());
     }
 
     @Override
@@ -61,9 +58,9 @@ public class AccountServiceImpl implements AccountService {
      */
     @Override
     public void update(Account account, Role role) {
-        if (role != null){
-            account.setRoles(new ArrayList<Role>(Arrays.asList(role)));
-        }
+//        if (role != null){
+//            account.setRoles(new ArrayList<Role>(Arrays.asList(role)));
+//        }
         accountRepository.save(account);
     }
 //
