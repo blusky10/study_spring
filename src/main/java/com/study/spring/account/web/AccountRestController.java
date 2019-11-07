@@ -1,7 +1,6 @@
 package com.study.spring.account.web;
 
 import com.study.spring.account.dto.AccountCreateDto;
-import com.study.spring.account.dto.AccountReqDto;
 import com.study.spring.account.dto.AccountResDto;
 import com.study.spring.account.service.AccountService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,24 +19,24 @@ public class AccountRestController {
     private AccountService accountService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<AccountResDto> get(@PathVariable Long id){
+    public ResponseEntity<AccountResDto> getAccount(@PathVariable Long id){
         return ResponseEntity.ok(accountService.findAccountById(id).convertToAccountResDto());
     }
 
 
-    // Post 로 조회를 테스트 해보기 위함 삭제 예정
-    @PostMapping
-    public ResponseEntity<AccountResDto> getResDto(@RequestBody AccountReqDto dto){
-        log.debug("INPUT : " + dto.toString() );
-        return ResponseEntity.ok(AccountResDto.builder().email("test@test.com")
-                .loginId("test")
-                .username("tester")
-                .build()
-        );
-    }
+//    // Post 로 조회를 테스트 해보기 위함 삭제 예정
+//    @PostMapping
+//    public ResponseEntity<AccountResDto> getAccountList(@RequestBody AccountReqDto dto){
+//        log.debug("INPUT : " + dto.toString() );
+//        return ResponseEntity.ok(AccountResDto.builder().email("test@test.com")
+//                .loginId("test")
+//                .username("tester")
+//                .build()
+//        );
+//    }
 
     @GetMapping
-    public Page<AccountResDto> getResDto(Pageable pageable){
+    public Page<AccountResDto> getPageableAccountList(Pageable pageable){
         return accountService.findAll(pageable);
     }
 
