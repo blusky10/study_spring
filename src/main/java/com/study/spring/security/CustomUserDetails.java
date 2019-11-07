@@ -25,10 +25,10 @@ public class CustomUserDetails implements UserDetails, Serializable{
         this.password = account.getPassword();
 
         List<GrantedAuthority> authorityList = new ArrayList<>();
-        for (Role role : account.getRoles()){
-            authorityList.add(new SimpleGrantedAuthority(role.getName().toUpperCase()));
-        }
-
+//        for (Role role : account.getRoles()){
+//            authorityList.add(new SimpleGrantedAuthority(role.getName().toUpperCase()));
+//        }
+        authorityList.add(new SimpleGrantedAuthority("USER"));
         this.authorities = authorityList;
     }
 
