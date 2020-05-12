@@ -4,9 +4,11 @@ import com.study.spring.domain.Account;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @NoArgsConstructor
+@ToString
 public class AccountResDto {
 
     private String loginId;
