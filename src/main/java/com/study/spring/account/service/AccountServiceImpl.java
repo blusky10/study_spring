@@ -11,9 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -49,6 +48,12 @@ public class AccountServiceImpl implements AccountService {
     public Page<AccountResDto> findAll(Pageable pageable) {
         Page<Account> accounts = accountRepository.findAll(pageable);
         return accounts.map(AccountResDto::new);
+    }
+
+    @Override
+    public List<AccountResDto> findAll() {
+        List<Account> accounts = accountRepository.findAll();
+        return accounts.stream().map(ac -> new AccountResDto(ac)).collect(Collectors.toList());
     }
 
     /**
