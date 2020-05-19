@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController("/api/v1/accounts")
 @Slf4j
 public class AccountRestController {
@@ -39,8 +41,13 @@ public class AccountRestController {
     public Page<AccountResDto> getPageableAccountList(Pageable pageable){
         return accountService.findAll(pageable);
     }
+//
+//    @GetMapping
+//    public List<AccountResDto> getList(){
+//        return accountService.findAllList();
+//    }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<String> createAccount(@RequestBody AccountCreateDto accountCreateDto){
 
         log.debug("ACCOUNT CREATE : " + accountCreateDto.toString());
