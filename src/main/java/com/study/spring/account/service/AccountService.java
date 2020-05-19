@@ -24,6 +24,6 @@ public interface AccountService {
 
     Page<AccountResDto> findAll(Pageable pageable);
 
-    List<AccountResDto> findAllList();
+    List<AccountResDto> findAll();
 
 }

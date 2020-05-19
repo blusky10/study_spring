@@ -4,7 +4,6 @@ import com.study.spring.account.dto.AccountCreateDto;
 import com.study.spring.account.dto.AccountResDto;
 import com.study.spring.account.service.AccountService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -13,12 +12,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/api/v1/accounts")
+@RestController
+@RequestMapping("/api/v1/accounts")
 @Slf4j
 public class AccountRestController {
 
-    @Autowired
-    private AccountService accountService;
+    private final AccountService accountService;
+
+    public AccountRestController(AccountService accountService) {
+        this.accountService = accountService;
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<AccountResDto> getAccount(@PathVariable Long id){
@@ -37,23 +40,21 @@ public class AccountRestController {
 //        );
 //    }
 
-    @GetMapping
-    public Page<AccountResDto> getPageableAccountList(Pageable pageable){
+    @GetMapping("/pageList")
+    public Page<AccountResDto> getPageList(Pageable pageable){
         return accountService.findAll(pageable);
     }
-//
-//    @GetMapping
-//    public List<AccountResDto> getList(){
-//        return accountService.findAllList();
-//    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<AccountResDto>> getList(){
+        List<AccountResDto> accountResDtoList = accountService.findAll();
+        return ResponseEntity.ok(accountResDtoList);
+    }
 
     @PostMapping("/create")
     public ResponseEntity<String> createAccount(@RequestBody AccountCreateDto accountCreateDto){
-
         log.debug("ACCOUNT CREATE : " + accountCreateDto.toString());
-
         accountService.create(accountCreateDto);
-
         return new ResponseEntity(HttpStatus.CREATED);
     }
 }
