@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.1.7.RELEASE'
+		springBootVersion = '2.2.7.RELEASE'
 	}
 	repositories {
 		jcenter()
@@ -25,6 +25,7 @@ idea {
 	}
 }
 
+group = 'polpid-study'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
