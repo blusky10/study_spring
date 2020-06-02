@@ -1,2 +1,3 @@
+rootProject.name = 'study_spring'
 include 'spring-properties'
 
