@@ -98,7 +98,7 @@ hs_err_pid*
 ### Gradle ###
 .gradle
 /build/
-../build
+build/
 gradle/
 gradlew
 gradlew.bat
