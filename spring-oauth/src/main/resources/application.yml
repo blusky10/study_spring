@@ -4,3 +4,7 @@ spring:
 
 server:
   port: 9100
+
+logging:
+  level:
+    org.springframework.boot.security: debug
