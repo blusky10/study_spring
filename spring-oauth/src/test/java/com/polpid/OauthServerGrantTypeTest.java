@@ -2,6 +2,7 @@ package com.polpid;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class OauthServerTest {
+public class OauthServerGrantTypeTest {
 
     private static final String CLIENT_ID = "myclient";
     private static final String CLIENT_SECRET = "secret";
@@ -30,14 +31,18 @@ public class OauthServerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Test
-    public void getAccessTokenWithClientCredentials() throws IOException {
+    private String encodedCredential;
 
+    @Before
+    public void setup(){
         String orgClientIdAndSecret = CLIENT_ID + ":" + CLIENT_SECRET;
         Base64.Encoder encoder = Base64.getEncoder();
-        String encodedCredential = encoder.encodeToString(orgClientIdAndSecret.getBytes());
+        encodedCredential = encoder.encodeToString(orgClientIdAndSecret.getBytes());
         System.out.println("encodedCredential : " + encodedCredential);
+    }
 
+    @Test
+    public void getAccessTokenWithClientCredentials() throws IOException {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         headers.set("Authorization", "Basic " + encodedCredential);
@@ -57,18 +62,14 @@ public class OauthServerTest {
 
     @Test
     public void getAccessTokenWithPassword() throws IOException {
-
-        String orgClientIdAndSecret = CLIENT_ID + ":" + CLIENT_SECRET;
-        Base64.Encoder encoder = Base64.getEncoder();
-        String encodedCredential = encoder.encodeToString(orgClientIdAndSecret.getBytes());
-        System.out.println("encodedCredential : " + encodedCredential);
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         headers.set("Authorization", "Basic " + encodedCredential);
 
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-        body.add("grant_type", "client_credentials");
+        body.add("grant_type", "password");
+        body.add("username", "admin");
+        body.add("password", "admin1@");
 
         HttpEntity<?> httpEntity = new HttpEntity(body, headers);
 
