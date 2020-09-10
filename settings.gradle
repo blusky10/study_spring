@@ -1,4 +1,5 @@
 rootProject.name = 'study_spring'
 include 'spring-properties'
 include 'spring-oauth'
+include 'spring-common-user'
 

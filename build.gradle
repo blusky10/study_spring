@@ -53,7 +53,9 @@ project(':spring-properties') {
 project(':spring-oauth') {
 
 }
+project(':spring-common-user') {
 
+}
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-amqp'
