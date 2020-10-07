@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: spring-common-user
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+
+server:
+  port: 9200
+
+logging:
+  level:
+    org.springframework.boot.web: debug
