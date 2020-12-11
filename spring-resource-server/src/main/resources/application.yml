@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: spring-resource-server
+
+server:
+  port: 9300
+
+logging:
+  level:
+    org.springframework.boot.security: debug
