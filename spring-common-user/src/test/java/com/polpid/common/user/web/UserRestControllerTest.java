@@ -1,6 +1,5 @@
 package com.polpid.common.user.web;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.polpid.common.user.UserStatus;
 import com.polpid.common.user.domain.Users;
 import com.polpid.common.user.service.UserService;
@@ -29,9 +28,6 @@ public class UserRestControllerTest {
     @MockBean
     private UserService userService;
 
-    @Autowired
-    private ObjectMapper mapper;
-
     @Test
     public void getUsers() throws Exception {
 
@@ -47,5 +43,35 @@ public class UserRestControllerTest {
         this.mockMvc.perform(get("/users"))
                 .andDo(print())
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getUser() throws Exception {
+
+        when(userService.findUserById("test@test.com"))
+                .thenReturn(
+                        Users.builder()
+                                .email("test@test.com")
+                                .name("test")
+                                .status(UserStatus.APPLIED)
+                                .build()
+                );
+
+        this.mockMvc.perform(get("/users/test@test.com"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getUserException() throws Exception {
+
+        when(userService.findUserById("test11@test.com"))
+                .thenThrow(
+                new RuntimeException("User not found")
+                );
+
+        this.mockMvc.perform(get("/users/test11@test.com"))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
     }
 }
