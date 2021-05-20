@@ -16,11 +16,12 @@ import java.util.Arrays;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(UserRestController.class)
-public class UserRestControllerTest {
+@WebMvcTest(UserController.class)
+public class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -42,7 +43,9 @@ public class UserRestControllerTest {
 
         this.mockMvc.perform(get("/users"))
                 .andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("@[0].email").value("test@test.com"));
+
     }
 
     @Test
@@ -63,7 +66,7 @@ public class UserRestControllerTest {
     }
 
     @Test
-    public void getUserException() throws Exception {
+    public void getUserNotFoundException() throws Exception {
 
         when(userService.findUserById("test11@test.com"))
                 .thenThrow(

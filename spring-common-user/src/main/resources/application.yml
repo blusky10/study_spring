@@ -11,6 +11,9 @@ spring:
       path: /h2-console
       settings:
         web-allow-others: true
+  output:
+    ansi:
+      enabled: always
 
 server:
   port: 9200
