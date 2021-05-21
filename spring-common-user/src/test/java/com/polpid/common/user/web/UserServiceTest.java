@@ -12,7 +12,10 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.test.util.ReflectionTestUtils;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Optional;
 
 import static org.mockito.Mockito.verify;
@@ -73,5 +76,32 @@ public class UserServiceTest {
         userService.findUserById("test011@test.com");
 
         verify(userService).findUserById("test011@test.com");
+    }
+
+
+    @Test
+    public void privateMethodTestReflectionUtilsFalse(){
+        boolean validateId = ReflectionTestUtils.invokeMethod(userService, "validateId", new Object[]{ null });
+        Assert.assertFalse(validateId);
+    }
+
+    @Test
+    public void privateMethodTestReflectionUtilsTrue(){
+        boolean validateId = ReflectionTestUtils.invokeMethod(userService, "validateId", "TEST");
+        Assert.assertTrue(validateId);
+    }
+
+    @Test
+    public void privateMethodTestMethodInvoke(){
+        try {
+            Method validateIdMethod = UserService.class.getDeclaredMethod("validateId", String.class);
+            validateIdMethod.setAccessible(true);
+
+            boolean test = (boolean)validateIdMethod.invoke(userService, "TEST");
+
+            Assert.assertTrue(test);
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 }

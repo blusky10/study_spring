@@ -22,4 +22,8 @@ public class UserService {
     public Users findUserById(String id){
         return userRepository.findById(id).orElseThrow(()->new RuntimeException("User not found"));
     }
+
+    private boolean validateId(String id){
+        return id==null?false:true;
+    }
 }
